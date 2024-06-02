@@ -5,6 +5,6 @@ I can make much more complicated model, but it's not necessary for the case of K
 
 The gaps in my models versus baseline model just relative for some reasons:
 - The data I had to preprocess (add noise, transform to Audio Feature, ...) and export them to disk for later use for saving GPU using time.
-- The training setup was much fewer epochs than any KWS model was proposed, just about 80 epochs. Time consuming for each model training was about 7-8 hours and need at least 2 account Google Grive to handle. It's why I couldn't do more experiments.
+- The training setup was much fewer epochs than any KWS model was proposed, just about 80 epochs. Total time for each model training was about 7-8 hours and need at least 2 account Google Grive to handle. It's why I couldn't do more experiments.
 
 After all my wish was done, I am very proud to share you this!!!!
