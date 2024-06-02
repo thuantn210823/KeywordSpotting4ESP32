@@ -19,6 +19,8 @@ This project mostly based on the example micro_speech provided by TensorFlow, wh
 
 Here is some Demo Videos if you interest: <https://drive.google.com/drive/folders/1-3ld8DmlK0q0sXuZQUgdvyo8z4V3zNo9?usp=drive_link>
 
+Each descriptions were made in respective folders, you can follow them to explore. If you have any question, just email me <thuan.tn210823@sis.hust.edu.vn> or <tranthuan10x@gmail.com>. 
+
 References:
 - Zhang, Yundong, et al. "Hello edge: Keyword spotting on microcontrollers." arXiv preprint arXiv:1711.07128 (2017).
 - López-Espejo, Iván, et al. "Deep spoken keyword spotting: An overview." IEEE Access 10 (2021): 4169-4199.
