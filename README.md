@@ -17,7 +17,7 @@ Tools:
 
 This project mostly based on the example micro_speech provided by TensorFlow, which can be found here: <https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech>
 
-Here is some Videos Demo if you interest: <https://drive.google.com/drive/folders/1-3ld8DmlK0q0sXuZQUgdvyo8z4V3zNo9?usp=drive_link>
+Here is some Demo Videos if you interest: <https://drive.google.com/drive/folders/1-3ld8DmlK0q0sXuZQUgdvyo8z4V3zNo9?usp=drive_link>
 
 References:
 - Zhang, Yundong, et al. "Hello edge: Keyword spotting on microcontrollers." arXiv preprint arXiv:1711.07128 (2017).
