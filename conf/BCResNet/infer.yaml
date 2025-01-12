@@ -1,0 +1,22 @@
+transform_type: logmel
+sample_rate: 16000
+n_fft: 512
+win_length: 480
+hop_length: 160
+n_mels: 40
+model: BCResNet
+in_channels: 1
+num_classes: 12
+mul_factor: 3
+ckpt_path: pretrained\bcresnet-gsc2-12.ckpt
+wanted_words:
+- down
+- go
+- left
+- no
+- off
+- on
+- right
+- stop
+- up
+- yes

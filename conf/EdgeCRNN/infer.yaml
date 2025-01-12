@@ -1,0 +1,25 @@
+transform_type: 'LFBE_Delta'
+sample_rate: 16000
+n_mfcc: 13
+n_mels: 13
+n_fft: 480
+hop_length: 160
+f_min: 20
+f_max: 4000
+model: EdgeCRNN
+in_channels: 1
+hidden_size: 64
+num_classes: 12
+width_multiplier: 1
+ckpt_path: pretrained\edgecrnn-gsc2-12.ckpt
+wanted_words:
+- down
+- go
+- left
+- no
+- off
+- on
+- right
+- stop
+- up
+- yes
