@@ -46,6 +46,6 @@ width_multiplier: 1
 num_classes: 12
 seed: 42
 ckpt_dir: YOUR_PATH
-device: 'cuda:0'
+device: cuda:0
 max_epochs: 500
 gradient_clip_val: 5

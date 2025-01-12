@@ -43,6 +43,6 @@ num_classes: 12
 mul_factor: 3
 seed: 42
 ckpt_dir: YOUR_PATH
-device: 'cuda:0'
+device: cuda:0
 max_epochs: 100
 gradient_clip_val: null
