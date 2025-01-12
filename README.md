@@ -1,32 +1,126 @@
-# KeywordSpotting4ESP32
-## Keyword Spotting on Microcontrollers
-Time: Feb 2024 - May 2024
+# KeywordSpoting for Microcontrollers
+This repository reimplements several state-of-the-art (SOTA) architectures for Keyword Spotting (KWS) using different approaches, including TCN, CRNN, and CNN, with the PyTorch framework. The models include **MDTC** from the paper '*Two-Stage Streaming Keyword Detection and Localization with Multi-Scale Depthwise Temporal Convolution*', **EdgeCRNN** from '*EdgeCRNN: An Edge-Computing Oriented Model for Acoustic Feature Enhancement in Keyword Spotting*', and **BC-ResNet** from '*Broadcasted Residual Learning for Efficient Keyword Spotting*'.
 
-This project aims to:
-- Build a production device that continuously listens for users’ wake-up words, commands, first step of an arbitrary Virtual Assistant.
-- Apply simple Deep learning neural networks to achieve high accuracy, while maintaining small footprint, efficient and low-energy consumption.
-- Deploy to popular microcontrollers, such as ESP-based, and ARM-based.
-- Propose a novel model that satisfies all the above criteria and surpasses other previous SOTA models
+I have also proposed a novel model, **TF-ResNet**, which is highly competitive with the top-1 **BC-ResNet**.
 
-Benchmark dataset was used is Google Speech Commands v2, which can be found here: <https://arxiv.org/pdf/1804.03209>
+The best models were deployed to ESP32 microcontrollers for real-world performance testing.
+## Installation
+Clone my repo
+```bash
+$ git clone https://github.com/thuantn210823/KeywordSpotting4ESP32.git
+```
+Install all required libraries in the `requirements.txt` file.
+```bash
+cd KeywordSpotting4ESP32
+pip install -r requirements.txt
+```
+## Run
+For training
+```sh
+cd KeywordSpotting4ESP32
+py train.py --config_yaml YAML_PATH
+```
+For inference
+```sh
+cd KeywordSpotting4ESP32
+py infer.py --config_yaml YAML_PATH --audio_path AUDIO_PATH
+```
+`Note:` If the above command doesn’t work, try replacing `py` with `python`, or the full `python.exe` path (i.e. `~/Python3xx/python.exe`) if the above code doesn't work.
+## Example
+```sh
+cd KeywordSpotting4ESP32
+py train.py --config_yaml conf/BCResNet/train.yaml
+```
+```sh
+cd KeywordSpotting4ESP32
+py infer.py --config_yaml conf/BCResNet/infer.yaml --audio_path example/right.wav
+```
+`Note:` Some arguments in these `train.yaml` files are still left blank waiting for you to complete. 
 
-Tools:
-- Pytorch -> Research and experiment
-- TensorFlow, TensorFlow Lite -> Deployment
-- Arduino IDE -> Compiler
+Here is what you should get for the inference run above:
+```sh
+Detected: right command!
+```
+## Pretrained Models
+Pretrained models are offerred here, which you can find in the `pretrained` directory. All model checkpoints are available, except for MDTC, which I lost due to a failure to save it
 
-This project mostly based on the example micro_speech provided by TensorFlow, which can be found here: <https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech>
+## Results
+I performed data augmentation offline, so the results may be slightly less accurate. The table below presents my results on the Benchmark dataset, Google Speech Commands version 2
+| Model |#Param|#Mult| #Acc | #FAr| #FRr (keyword `on`)|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|MDTC 4-64-5|164K|12.27M|-|-|-|
+|EdgeCRNN-1x|454.86K|14.04M|96.31%|0%|3.79%|
+|BCResNet-3|54.2K|14.53M|98.09%|0%|3.28%|
 
-Here is some Demo Videos if you interest: <https://drive.google.com/drive/folders/1-3ld8DmlK0q0sXuZQUgdvyo8z4V3zNo9?usp=drive_link>
+## Novel Model
+I have proposed a new architecture called TF-ResNet, along with its pretrained model, which is available here. Below are its architecture details and results. My baseline for comparison is BC-ResNet, with the Top-1 accuracy on the Google Speech Commands 12 dataset.
+![TF-ResNet](https://github.com/thuantn210823/KeywordSpotting4ESP32/blob/main/fig/TFResNet_v1.png)
+| Model |#Param|#Mult| #Acc |
+|:-:|:-:|:-:|:-:|
+|BCResNet-3|54.2K|**14.53M**|98.09%|
+|TFResNetv1-3|**45.1K**|24.82M|97.98%|
+|TFResNetv2-3|46.2K|**12.65M**|97.91%|
 
-Descriptions were made in respective folders, you can follow them to explore. If you have any question, just email me <thuan.tn210823@sis.hust.edu.vn> or <tranthuan10x@gmail.com>. 
+I can only share version 1 with you, which offers the same performance, fewer parameters, but slightly more operations. In version 2, I’ve addressed both issues. If you're interested, feel free to contact me for more information.
 
-References:
-- Zhang, Yundong, et al. "Hello edge: Keyword spotting on microcontrollers." arXiv preprint arXiv:1711.07128 (2017).
-- López-Espejo, Iván, et al. "Deep spoken keyword spotting: An overview." IEEE Access 10 (2021): 4169-4199.
-- Hou, Jingyong, Lei Xie, and Shilei Zhang. "Two-stage streaming keyword detection and localization with multi-scale depthwise temporal convolution." Neural Networks 150 (2022): 28-42.
-- Wei, Yungen, et al. "EdgeCRNN: an edge-computing oriented model of acoustic feature enhancement for keyword spotting." Journal of Ambient Intelligence and Humanized Computing (2022): 1-11.
-- Kim, Byeonggeun, et al. "Broadcasted residual learning for efficient keyword spotting." arXiv preprint arXiv:2106.04140 (2021).
-- Wang, Jie, et al. "WeKws: A production first small-footprint end-to-end Keyword Spotting Toolkit." ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2023.
-- Warden, Pete. "Speech commands: A dataset for limited-vocabulary speech recognition." arXiv preprint arXiv:1804.03209 (2018).
+## Deployment
+To evaluate performance, I deployed some of my models to the ESP32 microcontroller using `ONNX` and `TFLite`. For more details, you can check the `conversion.py` file and `Firmware` directory.
+![Hardware](https://github.com/thuantn210823/KeywordSpotting4ESP32/blob/main/Hardware_ESP32_INMP441.jpg)
 
+## Citation
+Cite their great papers!
+```
+@article{zhang2017hello,
+  title={Hello edge: Keyword spotting on microcontrollers},
+  author={Zhang, Yundong and Suda, Naveen and Lai, Liangzhen and Chandra, Vikas},
+  journal={arXiv preprint arXiv:1711.07128},
+  year={2017}
+}
+```
+```
+@article{lopez2021deep,
+  title={Deep spoken keyword spotting: An overview},
+  author={L{\'o}pez-Espejo, Iv{\'a}n and Tan, Zheng-Hua and Hansen, John HL and Jensen, Jesper},
+  journal={IEEE Access},
+  volume={10},
+  pages={4169--4199},
+  year={2021},
+  publisher={IEEE}
+}
+```
+```
+@article{wei2022edgecrnn,
+  title={EdgeCRNN: an edge-computing oriented model of acoustic feature enhancement for keyword spotting},
+  author={Wei, Yungen and Gong, Zheng and Yang, Shunzhi and Ye, Kai and Wen, Yamin},
+  journal={Journal of Ambient Intelligence and Humanized Computing},
+  pages={1--11},
+  year={2022},
+  publisher={Springer}
+}
+```
+```
+@article{kim2021broadcasted,
+  title={Broadcasted residual learning for efficient keyword spotting},
+  author={Kim, Byeonggeun and Chang, Simyung and Lee, Jinkyu and Sung, Dooyong},
+  journal={arXiv preprint arXiv:2106.04140},
+  year={2021}
+}
+```
+```
+@inproceedings{wang2023wekws,
+  title={Wekws: A production first small-footprint end-to-end keyword spotting toolkit},
+  author={Wang, Jie and Xu, Menglong and Hou, Jingyong and Zhang, Binbin and Zhang, Xiao-Lei and Xie, Lei and Pan, Fuping},
+  booktitle={ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  pages={1--5},
+  year={2023},
+  organization={IEEE}
+}
+```
+```
+@article{warden2018speech,
+  title={Speech commands: A dataset for limited-vocabulary speech recognition},
+  author={Warden, Pete},
+  journal={arXiv preprint arXiv:1804.03209},
+  year={2018}
+}
+```
