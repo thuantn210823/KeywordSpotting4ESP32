@@ -8,7 +8,7 @@ model: TFResNet
 in_channels: 1
 num_classes: 12
 mul_factor: 3
-ckpt_path: pretrained\tfresnet-v1-gsc2-12.ckpt
+ckpt_path: pretrained/tfresnet-v1-gsc2-12.ckpt
 wanted_words:
 - down
 - go

@@ -11,7 +11,7 @@ in_channels: 1
 hidden_size: 64
 num_classes: 12
 width_multiplier: 1
-ckpt_path: pretrained\edgecrnn-gsc2-12.ckpt
+ckpt_path: pretrained/edgecrnn-gsc2-12.ckpt
 wanted_words:
 - down
 - go

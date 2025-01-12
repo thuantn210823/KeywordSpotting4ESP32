@@ -8,3 +8,4 @@ numpy
 torchmetrics
 zipfile
 tarfile
+yaml
