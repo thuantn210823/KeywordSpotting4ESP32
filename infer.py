@@ -1,7 +1,7 @@
 import yaml
 import argparse
 
-import torchaudio
+import librosa
 
 from KWS_helper.transforms import transform
 from TFResNet import *
@@ -70,7 +70,8 @@ def infer(args):
     
     ckpt = torch.load(args.ckpt_path, map_location = 'cpu', weights_only = False)
     model.load_state_dict(ckpt['state_dict'])
-    wav, sr = torchaudio.load(args.audio_path)
+    wav, sr = librosa.load(args.audio_path, sr = args.sample_rate)
+    wav = torch.from_numpy(wav.copy()).unsqueeze(0)
     spec = trans(wav).unsqueeze(0)
     model.eval()
     preds = model(spec)

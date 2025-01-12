@@ -1,11 +1,9 @@
+numpy
+librosa
 torch
 onnx
 tensorflow
 onnx_tf
 scc4onnx
 torchaudio
-numpy
 torchmetrics
-zipfile
-tarfile
-yaml
