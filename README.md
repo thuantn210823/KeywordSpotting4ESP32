@@ -38,7 +38,7 @@ py infer.py --config_yaml conf/BCResNet/infer.yaml --audio_path example/right.wa
 `Note:` Some arguments in these `train.yaml` files are still left blank waiting for you to complete. 
 
 Here is what you should get for the inference run above:
-```sh
+```
 Detected: right command!
 ```
 ## Pretrained Models
