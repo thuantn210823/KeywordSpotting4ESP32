@@ -67,6 +67,8 @@ I can only share version 1 with you, which offers the same performance, fewer pa
 To evaluate performance, I deployed some of my models to the ESP32 microcontroller using `ONNX` and `TFLite`. For more details, you can check the `conversion.py` file and `Firmware` directory.
 ![Hardware](https://github.com/thuantn210823/KeywordSpotting4ESP32/blob/main/Hardware_ESP32_INMP441.jpg)
 
+Below are some of my demos for both the **Wake-up Word (WuW)** and **Speech Commands** problems. You can find them here if you're interested: [demo](https://drive.google.com/drive/folders/1-3ld8DmlK0q0sXuZQUgdvyo8z4V3zNo9).
+
 ## Citation
 Cite their great papers!
 ```
